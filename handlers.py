@@ -57,9 +57,6 @@ async def mes_settings(message: types.Message):
         await message.answer('Жребий определил: первым ходишь ты! Бери конфеты!')
     await mes_sweets(message)
 
-@dp.message_handler(text=['bla','бла','Бла'])
-async def mes_bla(message: types.Message):
-    await message.answer('Бла Бла Бла')
 
 @dp.message_handler()
 async def mes_sweets(message: types.Message):
@@ -84,7 +81,7 @@ async def mes_sweets(message: types.Message):
             await message.answer(f'Ход Бота: ')
             bot_sweets = total % (limit + 1)
             if bot_sweets == 0:
-                bot_sweets = limit
+                bot_sweets = RI(1, limit + 1)
             total -= bot_sweets
             await message.answer(f'Бот взял {bot_sweets} 🍬 конфет. Осталось: {total} 🍬')
             if total == 0:
@@ -94,4 +91,3 @@ async def mes_sweets(message: types.Message):
             await message.answer(f'Теперь твой ход, {message.from_user.first_name}!')
     else:
         await message.answer(f'Введи число !', reply_markup=kb_main_menu)
-# от 1 до {limit}
